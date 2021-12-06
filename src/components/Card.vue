@@ -20,16 +20,8 @@ export default {
 .hello {
   border: 1px solid rgba(128, 128, 238, 0.671);
   border-radius: 2%;
-  /* width: 20vw; */
-  /* height: 20vw; */
   margin: 0.5em 0px;
-  /* margin: 0.5em auto; */
   flex: 0 0 30%;
-  /* padding: 5px;
-  max-width: 300px;
-  max-height: 400px;
-  min-width: 80px;
-  min-height: 120px; */
 }
 .hidden {
   visibility: hidden;

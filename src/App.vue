@@ -1,11 +1,7 @@
 <template>
   <div id="nav">
-    <!--
-    <router-link class="router-button" to="/">Apps</router-link> |
-    <router-link class="router-button" to="/about">Schedule</router-link>
-    -->
     <div class="router-button" @click="$router.push('/')">Apps</div>
-    <div class="router-button" @click="$router.push('about')">Schedule</div>
+    <div class="router-button" @click="$router.push('schedule')">Schedule</div>
   </div>
   <router-view />
 </template>
