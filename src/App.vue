@@ -43,7 +43,9 @@
     </div>
   </div>
 
-  <router-view />
+  <div class="content-view">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -96,11 +98,19 @@ body {
   height: 85%;
 }
 
+.content-view {
+  /* width: 100%; */
+  height: 100%;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+}
+
 #topbar {
   height: 40px;
   width: 100%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
 }
 .router-button1 {
   background-color: #548bb1;

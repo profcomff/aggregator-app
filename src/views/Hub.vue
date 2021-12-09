@@ -43,7 +43,10 @@ export default {
   height: 100%;
   max-width: 768px;
   overflow: auto;
-  padding: 0.5em;
+  /* padding: 0.5em; */
+  padding-bottom: 20px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 @media (max-width: 768px) {
   .container {
