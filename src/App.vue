@@ -1,14 +1,36 @@
 <template>
+  <div id="topbar">
+    <div class="router-button1 router-button1__icon">
+      <div class="router-button__descr1">
+        <div class="descr__img1">
+          <img src="@/assets/profile.png" />
+        </div>
+      </div>
+    </div>
+
+    <div class="router-button1 router-button1__naming">
+      {{ translateNaming[isActive] }}
+    </div>
+
+    <div class="router-button1 router-button1__icon">
+      <div class="router-button__descr1">
+        <div class="descr__img1">
+          <img class="img__burger1" src="@/assets/burger.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="nav">
-    <div class="router-button" @click="routeApp(0)">
+    <div class="router-button" @click="routeApp('hub')">
       <div class="router-button__descr">
         <div class="descr__img" v-bind:class="{ active: isActive == 'hub' }">
           <img width="18px" height="18px" src="@/assets/hub.png" />
         </div>
-        <p>Приложения</p>
+        <p>{{ translateNaming["hub"] }}</p>
       </div>
     </div>
-    <div class="router-button" @click="routeApp(1)">
+    <div class="router-button" @click="routeApp('schedule')">
       <div class="router-button__descr">
         <div
           class="descr__img"
@@ -16,34 +38,40 @@
         >
           <img width="18px" height="18px" src="@/assets/schedule.png" />
         </div>
-        <p>Расписание</p>
+        <p>{{ translateNaming["schedule"] }}</p>
       </div>
     </div>
   </div>
+
   <router-view />
 </template>
 
 <script>
 // @ is an alias to /src
+//
 
 export default {
   name: "app",
   data() {
     return {
       isActive: "hub", // "hub" | "schedule"
+      translateNaming: {
+        hub: "Приложения",
+        schedule: "Расписание",
+      },
     };
   },
   mounted() {
-    // window.alert(window.innerWidth, screen.availWidth);
+    // console.log(window.innerWidth, screen.availWidth);
   },
   methods: {
-    routeApp(route = 0) {
-      if (route == 0) {
+    routeApp(route = "hub") {
+      if (route == "hub") {
         this.$router.push({ path: "/" });
-        this.isActive = "hub";
-      } else if (route == 1) {
-        this.$router.push({ path: "schedule" });
-        this.isActive = "schedule";
+        this.isActive = route;
+      } else if (route == "schedule") {
+        this.$router.push({ path: route });
+        this.isActive = route;
       }
     },
   },
@@ -60,18 +88,103 @@ body {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
   text-align: center;
   color: #2c3e50;
   height: 85%;
 }
 
+#topbar {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+.router-button1 {
+  background-color: #548bb1;
+  height: 100%;
+  /* flex: 1 1 80%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6px;
+
+  /* M3/title/large */
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 28px;
+  /* identical to box height, or 127% */
+  text-align: center;
+  /* Light */
+  color: rgba(255, 255, 255, 0.9);
+}
+.router-button1__icon {
+  flex: 1 1 15%;
+}
+.router-button1__naming {
+  flex: 1 1 70%;
+}
+
+.router-button__descr1 {
+  height: 70%;
+  /* border: 1px solid red; */
+  display: flex;
+  /* vertical-align: middle; */
+  align-items: center;
+  justify-content: center;
+}
+
+/* TODO: icon in figma -> to same height 18px */
+.router-button__descr1 img {
+  width: 22px;
+  height: 22px;
+  /* border: 1px solid blue; */
+  /* vertical-align: middle;
+  align-items: center;
+  justify-content: center; */
+}
+.descr__img1 {
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid red; */
+  align-items: center;
+  /* padding: auto; */
+}
+.descr__img1 .img__burger1 {
+  width: 4px;
+  height: 18px;
+}
+.router-button__descr1 p {
+  margin-top: 0px;
+  color: white;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  text-align: center;
+}
+.router-button__descr1 .descr__img {
+  width: 64px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.router-button__descr1 .active {
+  background: rgba(4, 4, 4, 0.1);
+  border-radius: 20px;
+}
+
 #nav {
   position: fixed;
   bottom: 0px;
-  height: 12%;
+  height: 60px;
   width: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -81,24 +194,30 @@ body {
   background-color: #548bb1;
   height: 100%;
   flex: 1 1 49%;
-  /* border: 1px solid rgba(49, 120, 187, 0.76); */
-  /* font-weight: bold;
-  font-size: 0.9em;
-  color: white; */
   display: flex;
   align-items: center;
   justify-content: center;
+  /* border: 1px solid blue; */
+  /* padding-top: 6px; */
 }
-/* .router-button__descr {
-  padding-top: 12px;
-} */
+.router-button__descr {
+  height: 70%;
+  /* width: 30%; */
+  /* display: flex; */
+  /* flex-flow: column wrap; */
+  /* vertical-align: middle;
+  align-items: center;
+  justify-content: center; */
+  /* border: 1px solid red; */
+}
+
 /* TODO: icon in figma -> to same height 18px */
 .router-button__descr img {
   width: 18px;
   height: 18px;
 }
 .router-button__descr p {
-  margin-top: 0;
+  margin-top: 0px;
   color: white;
   font-family: Roboto;
   font-size: 12px;
@@ -110,7 +229,7 @@ body {
 }
 .router-button__descr .descr__img {
   width: 64px;
-  height: 32px;
+  height: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
